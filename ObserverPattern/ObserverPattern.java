@@ -173,8 +173,6 @@ public class ObserverPattern{
         CurrentConditionsStatistics currentMeasures = new CurrentConditionsStatistics(weatherData);
         ForecastStatistics forecast = new ForecastStatistics(weatherData);
         
-        Temperature temperature = new Temperature(weatherData);
-        Pressure pressure = new Pressure(weatherData);
         weatherData.setMeasurements(78.0f, 5.0f, 6.1f);
         weatherData.setMeasurements(8.5f, 5.0f, 6.2f);
         

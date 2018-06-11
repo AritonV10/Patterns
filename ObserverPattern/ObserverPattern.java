@@ -1,18 +1,22 @@
 import java.util.*;
 
 interface Display{
+    
     void display();
 }
 
 interface Observer{
+    
     void update(float temperature, float humidity, float pressure);
 }
 interface Subject{
+    
     void registerObserver(Observer observer);
     void removeObserver(Observer observer);
     void notifyObservers();
 }
 class Temperature implements Observer{
+    
     private float temperature;
     private Subject subject;
     
@@ -27,9 +31,9 @@ class Temperature implements Observer{
     }
 }
 class Pressure implements Observer{
+    
     private float pressure;
     private Subject subject;
-    
     
     public Pressure(Subject subject){
         this.subject = subject;
@@ -43,6 +47,7 @@ class Pressure implements Observer{
     
 }
 class Humidity implements Observer{
+    
     private float humidity;
     private Subject subject;
     
@@ -59,6 +64,7 @@ class Humidity implements Observer{
 }
 
 class ForecastStatistics implements Observer{
+    
     private float temperature;
     private       Subject subject;
     
@@ -70,16 +76,17 @@ class ForecastStatistics implements Observer{
     @Override
     public void update(float temperature, float humidity, float pressure){
         if(temperature != this.temperature){
-            if(temperature < 75.0){
+            if(temperature < 75.0)
                 display("It's pretty cold outside");
-            } else if(temperature > 75.0 && temperature < 80.0){
+             else if(temperature > 75.0 && temperature < 80.0){
                 display("Good weather on the way!");
-            } else if(temperature > 80){
+             else if(temperature > 80){
                 display("It's pretty hot outside");
-            }
-            this.temperature = temperature;
+            
+             this.temperature = temperature;
         }
     }
+    
     public void display(String message){
         System.out.println("Forecast: " + message);
     }
@@ -88,6 +95,7 @@ class ForecastStatistics implements Observer{
 
 
 class CurrentConditionsStatistics implements Observer, Display{
+    
     private float temperature;
     private float humidity;
     private       Subject subject;
@@ -103,19 +111,21 @@ class CurrentConditionsStatistics implements Observer, Display{
             System.out.println("Temperature has been updated");
         if(humidity != this.humidity)
             System.out.println("Humidity has been updated");
+        
         this.temperature = temperature;
         this.humidity = humidity;
         display();
     }
+    
     @Override
     public void display(){
         System.out.println("Current conditions: " + this.temperature + " degrees and " + this.humidity + "% humidity");
     }
 } 
 class WeatherStation implements Subject{
-    float temperature;
-    float humidity;
-    float pressure;
+    private float temperature;
+    private float humidity;
+    private float pressure;
     
     private ArrayList<Observer> observers;
     
